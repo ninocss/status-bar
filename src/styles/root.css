@@ -1,0 +1,104 @@
+@import url('./background/enviorment/env.css');
+@import url('./background/mobs/creeper.css');
+@import url('./background/mobs/players.css');
+
+@import url('./header/server/server.css');
+@import url('./header/tab/tab-list.css');
+
+@import url('./list/player.css');
+
+:root {
+    /* -- Fonts -- */
+    --font-main: "Minecraft", "Press Start 2P", "Courier New", monospace;
+
+    /* -- Core Colors -- */
+    --bg-body: rgb(12, 12, 12);
+    --text-main: #e6e6e6;
+    --text-bright: #fffbe6;
+    --text-gold: #ffd24d;
+    --text-gold-dim: #fff7d6;
+    --text-muted: #9a8a7a;
+    --text-white-dim: #f0f0f0;
+
+    /* -- UI Theme (Dirt/Wood) -- */
+    --brown-light: #7a4f2b;
+    --brown-mid: #6b4f2f;
+    --brown-dark: #543b20;
+    --brown-darker: #3f2f1f;
+    --brown-deep: #2e2116;
+    
+    --border-brown: #2b1b11;
+    --shadow-brown: #21160f;
+    
+    /* -- UI Theme (Stone/Gray) -- */
+    --gray-light: #6f6f6f;
+    --gray-mid: #575757;
+    --gray-dark: #3c3c3c;
+    --gray-darker: #292929;
+    --gray-panel-top: #4a3f2f;
+    --gray-panel-btm: #392e20;
+
+    /* -- Status Colors -- */
+    --status-online-bg-top: #153a16;
+    --status-online-bg-btm: #0f2610;
+    --status-online-text: #e9ffea;
+    --status-online-dot: #4ade80;
+    
+    --status-offline-bg-top: #3a1c1c;
+    --status-offline-bg-btm: #241414;
+    --status-offline-text: #ffd9d9;
+    --status-offline-dot: #ff6b6b;
+
+    --status-connecting-bg-top: #3a2b10;
+    --status-connecting-bg-btm: #241805;
+    --status-connecting-text: #fff2c9;
+
+    /* -- Scrollbar -- */
+    --scroll-track-top: #3b322a;
+    --scroll-track-btm: #221a16;
+
+    /* -- Sky / Environment -- */
+    --sky-day-top: #6ec3ff;
+    --sky-day-mid: #bde0ff;
+    --sky-day-btm: #f9e3b0;
+    
+    --sky-night-top: #0b1424;
+    --sky-night-mid: #0a1322;
+    --sky-night-btm: #071019;
+
+    /* -- Entities -- */
+    --creeper-main: #0f5132;
+    --creeper-light: #198754;
+}
+
+body {
+    margin: 0;
+    padding: 24px;
+    font-family: var(--font-main);
+    background: var(--bg-body);
+    color: var(--text-main);
+    -webkit-font-smoothing: none;
+    image-rendering: crisp-edges;
+    position: relative;
+}
+
+body::before {
+    content: "Spieler-Liste";
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, var(--brown-light), var(--brown-dark));
+    color: var(--text-bright);
+    padding: 4px 10px;
+    font-weight: 700;
+    font-size: 13px;
+    border: 3px solid var(--border-brown);
+    border-radius: 6px;
+    box-shadow: 0 3px 0 var(--shadow-brown);
+    z-index: 999;
+    pointer-events: none;
+    font-family: inherit;
+    text-transform: none;
+    image-rendering: pixelated;
+}

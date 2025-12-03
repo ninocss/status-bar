@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[CONCEPT] Server List</title>
+    <meta name="description" content="Server list for Canstein-berlin.de — live server status, MOTD, and connected players.">
+    <meta name="keywords" content="Minecraft, server list, player list, Canstein, server status, MOTD">
+    <meta name="author" content="nino">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#0b1220">
+    <meta name="msapplication-TileColor" content="#0b1220">
+
+    <link rel="stylesheet" href="./src/styles/root.css">
+</head>
+<body>
+    <div class="tab-list">
+        <div class="tab-list-header">
+            <div class="server-info">
+                <img class="server-icon" src="" alt="Server Icon">
+                <div class="server-name">Canstein-berlin.de</div>
+                <p class="server-status connecting">loading...</p>
+                <p class="server-motd">loading...</p>
+                <div class="player-count">loading...</div>
+                <button class="reload-btn" style="font-weight: 900; font-size: 16px;" aria-label="Reload">
+                    <img src="https://canstein-berlin.de/wp-content/Server-Status/img/reload-svgrepo-com.svg" alt="" width="16" height="16" style="display:block; pointer-events:none; filter: invert(85%) sepia(3%) saturate(4%) hue-rotate(347deg) brightness(106%) contrast(0.85);">
+                </button>
+            </div>
+            
+            <small style="position:absolute;right:8px;bottom:8px;font-size:10px;opacity:0.85;pointer-events:none;z-index:2;user-select:none">Made by nino.css</small>
+            
+            <div class="bg-elements" aria-hidden="true">
+                <div class="bg-tree t1 bg-tree-clickable" role="button" tabindex="0" aria-label="Tree 1" title="Shake me!">
+                    <div class="tree-trunk"></div>
+                    <div class="tree-leaves"></div>
+                </div>
+                <div class="bg-tree t2 bg-tree-clickable" role="button" tabindex="0" aria-label="Tree 2" title="Shake me!">
+                    <div class="tree-trunk"></div>
+                    <div class="tree-leaves"></div>
+                </div>
+                <div class="bg-tree t3 bg-tree-clickable" role="button" tabindex="0" aria-label="Tree 3" title="Shake me!">
+                    <div class="tree-trunk"></div>
+                    <div class="tree-leaves"></div>
+                </div>
+                <div class="bg-tree t4 bg-tree-clickable" role="button" tabindex="0" aria-label="Tree 4" title="Shake me!">
+                    <div class="tree-trunk"></div>
+                    <div class="tree-leaves"></div>
+                </div>
+                <div class="bg-tree t5 bg-tree-clickable" role="button" tabindex="0" aria-label="Tree 5" title="Shake me!">
+                    <div class="tree-trunk"></div>
+                    <div class="tree-leaves"></div>
+                </div>
+                
+                <div class="bg-player p1" role="button" tabindex="0" aria-label="Background player 1" title="Click me!">
+                    <div class="bg-player-head"></div>
+                    <div class="bg-player-body"></div>
+                    <div class="bg-player-legs"></div>
+                    <div class="bg-bubble" aria-hidden="true">Hi!</div>
+                </div>
+
+                <div class="bg-creeper c1" role="button" aria-label="Creeper" tabindex="0" title="Click me... sssss">
+                    <div class="creeper-head"></div>
+                    <div class="creeper-body"></div>
+                </div>
+
+                <div class="mc-explosion c1" aria-hidden="true">
+                    <div class="flash"></div>
+                    <div class="wave"></div>
+                    <span class="piece" style="--tx:-22px;--ty:-16px;--clr:#fff7a1"></span>
+                    <span class="piece" style="--tx:12px;--ty:-12px;--clr:#ffd24d"></span>
+                    <span class="piece" style="--tx:-8px;--ty:10px;--clr:#ffb02e"></span>
+                    <span class="piece" style="--tx:24px;--ty:6px;--clr:#ff9f1a"></span>
+                    <span class="piece" style="--tx:-18px;--ty:8px;--clr:#ffd24d"></span>
+                    <span class="piece" style="--tx:6px;--ty:18px;--clr:#ff7a00"></span>
+                    <span class="piece" style="--tx:-26px;--ty:-4px;--clr:#fff7a1"></span>
+                    <span class="piece" style="--tx:18px;--ty:-22px;--clr:#ffb02e"></span>
+                    <span class="piece" style="--tx:-4px;--ty:-26px;--clr:#ffd24d"></span>
+                    <span class="piece" style="--tx:10px;--ty:26px;--clr:#ff9f1a"></span>
+                    <span class="piece" style="--tx:-12px;--ty:20px;--clr:#fff7a1"></span>
+                    <span class="piece" style="--tx:22px;--ty:-2px;--clr:#ffd24d"></span>
+                </div>
+
+                <div class="bg-player walker p2" role="button" tabindex="0" aria-label="Walker player" title="Click me!">
+                    <div class="flip">
+                        <div class="bg-player-head"></div>
+                        <div class="bg-player-body"></div>
+                        <div class="bg-player-legs"></div>
+                    </div>
+                    <div class="bg-bubble" aria-hidden="true" style="transform:translateX(-50%) translateY(-6px);left:50%;position:absolute;bottom:44px;">Hi!</div>
+                </div>
+
+                <div class="sky" aria-hidden="true"></div>
+                <div class="stars" aria-hidden="true"></div>
+                <div class="sun" aria-hidden="true"></div>
+                <div class="moon" aria-hidden="true"></div>
+                <div class="night" aria-hidden="true"></div>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <input id="player-search" type="search" placeholder="Search a player..." />
+            <button id="search-clear" class="reload-btn" title="Clear">Clear</button>
+        </div>
+
+        <div class="tab-list-content">
+            <div class="players-grid" id="players-grid"></div>
+        </div>
+    </div>
+
+    <script src="/src/scripts/server/request.js"></script>
+    <script src="/src/scripts/ui/tree.js"></script>
+    <script src="/src/scripts/ui/creeper.js"></script>
+    <script src="/src/scripts/ui/player.js"></script>
+</body>
+</html>

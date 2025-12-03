@@ -1,0 +1,218 @@
+@import url('../root.css');
+
+/* ===========================
+    Base player
+    =========================== */
+.bg-player {
+    position: absolute;
+    width: 16px;
+    height: 32px;
+    image-rendering: pixelated;
+    filter: drop-shadow(1px 2px 0 rgba(0,0,0,0.4));
+    pointer-events: auto;
+    cursor: pointer;
+    animation: playerBob 2s ease-in-out infinite;
+}
+
+/*  Parts (head / body / legs) */
+.bg-player-head {
+    width: 8px;
+    height: 8px;
+    background: #fdbcb4;
+    border: 1px solid rgba(0,0,0,0.2);
+    margin: 0 auto;
+}
+
+.bg-player-body {
+    width: 8px;
+    height: 12px;
+    background: linear-gradient(#4169e1, #1e40af);
+    border: 1px solid rgba(0,0,0,0.2);
+    margin: 0 auto;
+}
+
+.bg-player-legs {
+    width: 8px;
+    height: 10px;
+    background: linear-gradient(#2563eb, #1d4ed8);
+    border: 1px solid rgba(0,0,0,0.2);
+    margin: 0 auto;
+}
+
+/* ===========================
+        Player variants
+    =========================== */
+
+/* stationary player 1 placement */
+.bg-player.p1 {
+    right: 180px;
+    bottom: -8px;
+}
+
+/* alternate palette (player 2) */
+.bg-player.p2 .bg-player-head {
+    background: linear-gradient(var(--brown-light), var(--brown-mid));
+    border-color: rgba(0,0,0,0.25);
+}
+.bg-player.p2 .bg-player-body {
+    background: linear-gradient(#3fbf5f, #2e8b45);
+    border-color: rgba(0,0,0,0.18);
+}
+.bg-player.p2 .bg-player-legs {
+    background: linear-gradient(#6d4c41, #5d4037);
+    border-color: rgba(0,0,0,0.18);
+}
+
+/* ===========================
+    Walker variant (animated across scene)
+    =========================== */
+.bg-player.walker {
+    left: 112%;
+    bottom: -8px;
+    width: 18px;
+    height: 36px;
+    z-index: 6;
+    image-rendering: pixelated;
+    animation: playerBob 1.9s ease-in-out infinite, walkAcross 12s linear infinite, dayNight 18s ease-in-out infinite;
+    will-change: left, transform, filter, opacity;
+}
+
+.bg-player.walker.pause {
+    animation-play-state: paused;
+}
+
+.bg-player.walker .flip {
+    transform-origin: center;
+    animation: faceSwitch 12s steps(1,end) infinite;
+}
+
+.bg-player.walker .bg-player-legs {
+    transform-origin: center top;
+    animation: legStep 0.6s steps(2) infinite;
+}
+
+.bg-player.walker .bg-player-head,
+.bg-player.walker .bg-player-body,
+.bg-player.walker .bg-player-legs {
+    transition: filter 0.6s ease, opacity 0.6s ease;
+}
+
+/* taunt animation for walker  */
+.bg-player.walker.taunt .flip {
+    animation: tauntFlip 700ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* bubble shown by walker */
+.bg-player.walker .bg-bubble {
+    pointer-events: none;
+    transition: transform 320ms ease, opacity 320ms ease;
+    transform-origin: 50% 100%;
+    white-space: nowrap;
+    font-family: inherit;
+    font-size: 10px;
+    background: rgba(255,255,255,0.95);
+    color: #222;
+    padding: 4px 6px;
+    border-radius: 6px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.35);
+    z-index: 9;
+}
+
+/* show bubble for walker */
+.bg-player.walker.show-bubble .bg-bubble {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-18px) scale(1);
+}
+
+/* ===========================
+    Jumping behavior
+    =========================== */
+@keyframes bg-player-jump {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(-18px); }
+    60%  { transform: translateY(0); }
+    100% { transform: translateY(0); }
+}
+.bg-player.p1.jump {
+    animation: bg-player-jump 700ms cubic-bezier(.2,.8,.2,1);
+}
+/* bubble follows jump */
+.bg-player.p1.jump .bg-bubble {
+    transform: translateX(-50%) translateY(-18px) scale(1.02);
+    opacity: 1;
+}
+
+/* ===========================
+    Speech/label bubble (shared styles)
+    =========================== */
+.bg-bubble {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    bottom: 44px;
+    background: rgba(255,255,255,0.95);
+    color: #222;
+    padding: 4px 6px;
+    font-size: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.35);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 160ms ease, opacity 160ms ease;
+    z-index: 9;
+    font-family: inherit;
+}
+
+/* ===========================
+    Keyframes
+    =========================== */
+/* Idle bob used by base and walker (subtle up/down) */
+@keyframes playerBob {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-2px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Walk path across the scene — controls left and opacity */
+@keyframes walkAcross {
+    0%   { left: 112%; opacity: 1; }
+    20%  { left: 72%; }
+    45%  { left: 48%; }
+    55%  { left: 52%; }
+    80%  { left: 88%; }
+    100% { left: 112%; opacity: 1; }
+}
+
+/* Flip sprite horizontally depending on walk direction */
+@keyframes faceSwitch {
+    0%   { transform: scaleX(-1); }
+    44%  { transform: scaleX(-1); }
+    46%  { transform: scaleX(-1); }
+    50%  { transform: scaleX(1); }
+    100% { transform: scaleX(1); }
+}
+
+/* Leg stepping animation (simple rotation) */
+@keyframes legStep {
+    0%   { transform: rotate(0deg); }
+    50%  { transform: rotate(8deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Simulated day/night tint & brightness for walker */
+@keyframes dayNight {
+    0%   { filter: brightness(1) saturate(1); opacity: 1; }
+    55%  { filter: brightness(1) saturate(1); opacity: 1; }
+    65%  { filter: brightness(0.48) saturate(0.6) contrast(0.95) hue-rotate(200deg); opacity: 0.95; }
+    95%  { filter: brightness(0.48) saturate(0.6) contrast(0.95) hue-rotate(200deg); opacity: 0.95; }
+    100% { filter: brightness(1) saturate(1); opacity: 1; }
+}
+
+/* Taunt flip used when walker taunts */
+@keyframes tauntFlip {
+    0%   { transform: scaleX(-1) translateY(0) rotate(0deg); }
+    40%  { transform: scaleX(-1) translateY(-6px) rotate(-12deg) scale(1.05); }
+    70%  { transform: scaleX(-1) translateY(0) rotate(6deg) scale(1.02); }
+    100% { transform: scaleX(-1) translateY(0) rotate(0deg); }
+}

@@ -1,0 +1,155 @@
+@import url('../root.css');
+
+/* Header / Server info layout */
+.server-info {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+}
+
+/* Server icon  */
+.server-icon {
+    border: 3px solid #1b1b1b;
+    box-shadow: 0 3px 0 #111;
+    flex-shrink: 0;
+    height: 48px;
+    width: 48px;
+}
+
+/* Server name (primary title) */
+.server-name {
+    color: var(--text-gold);
+    font-size: 16px;
+    font-weight: 700;
+    text-shadow: 2px 2px 0 #0b0b0b, 0 0 0 #000;
+    text-transform: none;
+}
+
+/* Server MOTD / subtitle */
+.server-motd {
+    align-self: flex-start;
+    color: var(--text-white-dim);
+    flex-basis: 100%;
+    font-size: 12px;
+    margin-top: 8px;
+    opacity: 0.95;
+}
+
+/* Base server status pill (shared styling) */
+.server-status {
+    align-items: center;
+    background: linear-gradient(180deg, #2f2f2f 0%, #1f1f1f 100%);
+    border: 3px solid rgba(0,0,0,0.6);
+    border-radius: 6px;
+    box-shadow: 0 3px 0 #111, inset 0 2px 0 rgba(255,255,255,0.03);
+    color: var(--text-gold);
+    display: inline-flex;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: 10px;
+    padding: 6px 10px;
+    text-transform: none;
+    transition: transform 0.08s ease, background 0.12s ease, box-shadow 0.12s ease, color 0.12s ease;
+    user-select: none;
+}
+
+/* Status indicator dot  */
+.server-status::before {
+    background: #9aa0a6;
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    content: "";
+    display: inline-block;
+    flex-shrink: 0;
+    height: 10px;
+    transform-origin: center;
+    transition: background 0.12s ease, box-shadow 0.12s ease, transform 0.12s ease;
+    width: 10px;
+}
+
+/* Online status variant */
+.server-status.online {
+    background: linear-gradient(180deg, var(--status-online-bg-top) 0%, var(--status-online-bg-btm) 100%);
+    border-color: rgba(18,60,20,0.9);
+    box-shadow: 0 3px 0 #071007, inset 0 2px 0 rgba(255,255,255,0.02);
+    color: var(--status-online-text);
+}
+.server-status.online::before {
+    animation: server-ping 1.8s infinite ease-out;
+    background: var(--status-online-dot);
+    box-shadow: 0 0 18px rgba(74,222,128,0.28);
+}
+
+/* Offline status variant */
+.server-status.offline {
+    background: linear-gradient(180deg, var(--status-offline-bg-top) 0%, var(--status-offline-bg-btm) 100%);
+    border-color: rgba(60,12,12,0.9);
+    box-shadow: 0 3px 0 #120606, inset 0 2px 0 rgba(255,255,255,0.01);
+    color: var(--status-offline-text);
+}
+.server-status.offline::before {
+    animation: none;
+    background: var(--status-offline-dot);
+    box-shadow: 0 0 8px rgba(255,107,107,0.25);
+    transform: scale(.95);
+}
+
+/* Connecting / intermediate status */
+.server-status.connecting {
+    background: linear-gradient(180deg, var(--status-connecting-bg-top) 0%, var(--status-connecting-bg-btm) 100%);
+    color: var(--status-connecting-text);
+}
+.server-status.connecting::before {
+    animation: server-pulse 1.6s infinite ease-in-out;
+    background: var(--text-gold);
+    box-shadow: 0 0 12px rgba(255,210,77,0.28);
+}
+
+/* Hover / interaction states for the status pill */
+.server-status:hover {
+    box-shadow: 0 6px 0 rgba(0,0,0,0.45);
+    transform: translateY(-1px);
+}
+
+/* Status animations */
+@keyframes server-ping {
+    0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.28); transform: scale(1); }
+    60%  { box-shadow: 0 0 0 10px rgba(74,222,128,0); transform: scale(1.25); }
+    100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); transform: scale(1); }
+}
+@keyframes server-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255,210,77,0.28); transform: scale(1); }
+    50%  { box-shadow: 0 0 8px 6px rgba(255,210,77,0); transform: scale(1.12); }
+    100% { box-shadow: 0 0 0 0 rgba(255,210,77,0); transform: scale(1); }
+}
+
+/* Buttons: reload and NameMC (shared base) */
+.reload-btn, .namemc-btn {
+    background: linear-gradient(180deg, #7a5a2b, var(--brown-dark));
+    border: 3px solid var(--border-brown);
+    box-shadow: 0 4px 0 var(--shadow-brown);
+    color: var(--text-bright);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    image-rendering: pixelated;
+    padding: 6px 10px;
+}
+
+/* NameMC button tweaks */
+.namemc-btn {
+    font-size: 11px;
+    margin-left: auto;
+    padding: 4px 6px;
+    right: 8px;
+}
+
+/* Hover / active interactions for buttons */
+.reload-btn:hover {
+    transform: translateY(-1px);
+}
+.reload-btn:active, .namemc-btn:active {
+    box-shadow: 0 2px 0 var(--shadow-brown);
+    transform: translateY(2px);
+}
