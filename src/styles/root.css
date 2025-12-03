@@ -78,8 +78,25 @@ body {
     background: var(--bg-body);
     color: var(--text-main);
     -webkit-font-smoothing: none;
-    image-rendering: crisp-edges;
+    image-rendering: pixelated;
     position: relative;
+    overflow: hidden;
+}
+
+/* Background Bubble */
+body::after {
+    content: "";
+    position: absolute;
+    width: 1500px;
+    height: 1500px;
+    background: radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, rgba(12, 12, 12, 0) 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+    pointer-events: none;
 }
 
 body::before {
