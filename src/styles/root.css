@@ -100,7 +100,7 @@ body::after {
 }
 
 body::before {
-    content: "Spieler-Liste";
+    content: "Player list";
     position: absolute;
     left: 50%;
     top: 8px;
